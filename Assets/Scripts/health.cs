@@ -5,8 +5,8 @@ using UnityEngine;
 public class health : MonoBehaviour
 {
     [SerializeField] private float _maxHealth = 100;
-    [SerializeField] private int _lives = 3;
-    private float _currentHealth;
+    
+    [SerializeField] private float _currentHealth;
     private bool _isDead = false;
     private bool isShielded = false;
     
@@ -17,18 +17,20 @@ public class health : MonoBehaviour
         MainCharacter();
     }
 
-    private void MainCharacter()
+    public void MainCharacter()
     {
         _currentHealth = _maxHealth;
         _isDead = false;
-        _lives = 3;
         isShielded = false;
     }
 
     private void Die()
     {
         _isDead = true;
-        _lives--;
+        if (gameObject.tag == "Player") ;
+               GameManager.instance.UpdateLives();
+            
+        
     }
 
     public void TakeDamage(int damage)
@@ -37,13 +39,18 @@ public class health : MonoBehaviour
         {
             damage = 0;
             isShielded = false;
-
+            return;
         }
 
-        _currentHealth -= damage;
+        _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, _maxHealth);
 
         if (_currentHealth <= 0 && !_isDead)
+        {
             Die();
+            Heal();
+            GameManager.instance.SpawnPlayer();
+            
+        }
         return;
         
     }
@@ -55,6 +62,11 @@ public class health : MonoBehaviour
 
     public void Shield()
     {
+        isShielded = true;
+    }
 
+    public bool GetIsDead()
+    {
+        return _isDead;
     }
 }

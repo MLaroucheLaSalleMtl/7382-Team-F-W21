@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class SpeedUpPowerUp : MonoBehaviour
 {
-    [SerializeField] private float _speedUp = 6f;
+    [SerializeField] private float _speedUp = 8f;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
-        collision.GetComponent<Movement>().UpdateSpeed(_speedUp);
-        Destroy(this);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.GetComponentInChildren<Movement>().UpdateSpeed(_speedUp);
+            Destroy(this);
+        }
     }
 
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class EnemyShooting : MonoBehaviour
 {
     public float speed = 15f;
     public Rigidbody2D rb;
@@ -12,17 +12,17 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
         rb.velocity = transform.right * speed;
 
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != "Player") 
+        if (collision.tag != "Enemy")
         {
-            Debug.Log(collision.name);
-            if (collision.tag == "Enemy")
+            
+            if (collision.tag == "Player")
             {
                 Instantiate(Bleed, transform.position, transform.rotation);
                 Destroy(gameObject);
@@ -32,13 +32,11 @@ public class Bullet : MonoBehaviour
                 Instantiate(Impact, transform.position, transform.rotation);
                 Destroy(gameObject);
             }
-            
+
         }
 
-        
-        
-      
-    }
 
-  
+
+
+    }
 }

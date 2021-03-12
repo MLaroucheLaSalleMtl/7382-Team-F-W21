@@ -39,10 +39,10 @@ public class GameManager : MonoBehaviour
         player.transform.position = _startPoint.transform.position;
     }
 
-    public void UpdateLives(int delta)
+    public void UpdateLives()
     {
-        _lives += delta;
-
+        
+        _lives--;
         if (_lives < 0)
         {
             //GameOver();

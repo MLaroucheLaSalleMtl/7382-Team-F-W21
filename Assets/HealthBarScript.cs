@@ -14,7 +14,7 @@ public class HealthBarScript : MonoBehaviour
         slider.maxValue = health;
         slider.value = health;
 
-        //gradient.Evaluate(1f);
+        
     }
    public void SetHealth(float health)
     {
