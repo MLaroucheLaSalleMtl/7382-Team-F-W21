@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class HealPowerUp : MonoBehaviour
 {
-    [SerializeField] private int _restoreHealth = 30;
+    [SerializeField] private float _restoreHealth = 30;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponentInChildren<health>().Heal();
+            collision.GetComponentInChildren<health>().Heal(_restoreHealth);
             Destroy(this);
         }
     }

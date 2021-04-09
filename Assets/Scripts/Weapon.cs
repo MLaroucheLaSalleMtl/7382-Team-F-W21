@@ -13,12 +13,17 @@ public class Weapon : MonoBehaviour
     public Transform shotPoint;
     public Animator meleeAnimation;
     public Animator shootAnimation;
-    public float shootForce = 5f;
+    private float shootForce = 5f;
+
+    public float meleeDamage = 50f;
+    [SerializeField] private float gunDamageBase = 28f;
+    public float gunDamage;
 
     [SerializeField] private AudioSource[] _audioSource;
 
     void Start()
     {
+        gunDamage = gunDamageBase;
         meleeAnimation = GetComponent<Animator>();
         shootAnimation = GetComponent<Animator>();
         meleeRange.SetActive(false);
@@ -37,7 +42,7 @@ public class Weapon : MonoBehaviour
         GameObject bullet = Instantiate(projectile, shotPoint.position, shotPoint.rotation);
         //GameObject splash = Instantiate(projectile, shotPoint.position, shotPoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(shotPoint.up * shootForce, ForceMode2D.Impulse);
+        rb.AddForce(shotPoint.up * shootForce, ForceMode2D.Force);
 
     }
 
@@ -45,6 +50,7 @@ public class Weapon : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.right) * 10f, Color.red);
             shootAnimation.SetTrigger("isFiring");
             Shoot();
             _audioSource[0].Play();
@@ -69,8 +75,15 @@ public class Weapon : MonoBehaviour
         meleeRange.SetActive(false);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    public void UpdateGunDamage(float newDamage)
     {
-
+        gunDamage = newDamage;
     }
+
+    public void ResetGunDamage()
+    {
+        gunDamage = gunDamageBase;
+    }
+
+
 }

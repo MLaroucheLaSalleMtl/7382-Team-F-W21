@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _startPoint;
     [SerializeField] private GameObject player;
     [SerializeField] private int _lives = 3;
+    private GameObject[] enemies;
+    private int _score = 0;
 
 
     private void Awake()
@@ -25,6 +27,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         SpawnPlayer();
+        GetEnemies();
+        Subscribe();
     }
 
     // Update is called once per frame
@@ -39,13 +43,39 @@ public class GameManager : MonoBehaviour
         player.transform.position = _startPoint.transform.position;
     }
 
-    public void UpdateLives()
+    public void UpdateLives(int delta)
     {
-        
-        _lives--;
+        _lives += delta;
+
         if (_lives < 0)
         {
             //GameOver();
         }
+    }
+
+    private void GetEnemies()
+    {
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        print(enemies);
+    }
+
+    private void Subscribe()
+    {
+        foreach (var enemy in enemies)
+        {
+            enemy.GetComponent<EnemyHealth>().onEnemyDie += IncrementRage;
+            enemy.GetComponent<EnemyHealth>().onEnemyDie += IncrementScore;
+
+        }
+    }
+
+    private void IncrementScore()
+    {
+        _score += 100;
+    }
+
+    private void IncrementRage()
+    {
+        player.GetComponent<Rage>().IncrementRage(10);
     }
 }

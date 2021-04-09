@@ -4,25 +4,29 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public bool movement = false;
-    [SerializeField] private float speed = 4f;
-    public Animator walkAnimation;
+
+    public float movementSpeed;
+    public float speed = 4f;
+    private float speedBase;
+
 
     void Start()
     {
-        walkAnimation = GetComponent<Animator>();
+        
+        
+        
+        //walkAnimation = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        var movement = Input.GetAxis("Horizontal");
+        transform.position = new Vector3(movement, 0, 0) * Time.deltaTime * movementSpeed;
 
-        PlayerMovement();
-        
-            walkAnimation.SetBool("isMoving", true);
-        
-            
-        
+
+
+
     }
 
    
@@ -31,41 +35,9 @@ public class Movement : MonoBehaviour
         speed = newSpeed; 
     }
 
-
-    private void PlayerMovement()
+    public void ResetSpeed()
     {
-        
-        if(Input.GetKey(KeyCode.W))
-        {
-            
-            transform.Translate(Vector3.up * speed * Time.deltaTime, Space.World);
-            movement = true;
-            
-        }
-        if(Input.GetKey(KeyCode.S))
-        {
-            transform.Translate(Vector3.down * speed * Time.deltaTime, Space.World);           
-            movement = true;
-            
-        } 
-        if(Input.GetKey(KeyCode.A))
-        {
-            transform.Translate(Vector3.left * speed * Time.deltaTime, Space.World);           
-            movement = true;
-            
-
-        }
-        if(Input.GetKey(KeyCode.D))
-        {
-            transform.Translate(Vector3.right * speed * Time.deltaTime, Space.World);
-            movement = true;
-            
-        }
-        else
-        {
-            movement = false;
-
-            walkAnimation.SetBool("isMoving", false);
-        }
+        speed = speedBase;
     }
+   
 }

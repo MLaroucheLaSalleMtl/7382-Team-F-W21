@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 100
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f4e17262a295e454a82ad31f72df4882, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -121,7 +121,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.00000028338206}
   serializedVersion: 2
-  m_Radius: 0.4201934
+  m_Radius: 0.04
 --- !u!114 &-7274167896194287433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2743fb4948985d6418b5f9c3ac4a8119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 4
   rb: {fileID: 872731971425537362}
   Impact: {fileID: 1790205343023648535, guid: 42eeacc56deb5fa4385fa8456a4d1071, type: 3}
   Bleed: {fileID: 5375713485439101454, guid: b6afcf43268ef2b40beeb8d5fef9c06c, type: 3}

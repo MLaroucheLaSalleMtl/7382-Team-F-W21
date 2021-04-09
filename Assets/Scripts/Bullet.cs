@@ -19,15 +19,15 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != "Player") 
+        if (collision.tag != "Player" || collision.tag != "BUllet")
         {
-            Debug.Log(collision.name);
+            //Debug.Log(collision.name);
             if (collision.tag == "Enemy")
             {
                 Instantiate(Bleed, transform.position, transform.rotation);
                 Destroy(gameObject);
             }
-            else
+            else if(collision.tag == "Environment")
             {
                 Instantiate(Impact, transform.position, transform.rotation);
                 Destroy(gameObject);

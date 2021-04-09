@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class health : MonoBehaviour
 {
-    [SerializeField] private float _maxHealth = 100;
+    public float _maxHealth = 100;
     
     [SerializeField] private float _currentHealth;
     private bool _isDead = false;
@@ -27,14 +27,19 @@ public class health : MonoBehaviour
     private void Die()
     {
         _isDead = true;
-        if (gameObject.tag == "Player") ;
-               GameManager.instance.UpdateLives();
+        if (gameObject.CompareTag("Player"))
+               GameManager.instance.UpdateLives(-1);
             
         
     }
 
     public void TakeDamage(int damage)
     {
+        if(_isDead)
+        {
+            return;
+        }
+
         if (isShielded)
         {
             damage = 0;
@@ -47,7 +52,7 @@ public class health : MonoBehaviour
         if (_currentHealth <= 0 && !_isDead)
         {
             Die();
-            Heal();
+            Heal(_maxHealth);
             GameManager.instance.SpawnPlayer();
             
         }
@@ -55,9 +60,9 @@ public class health : MonoBehaviour
         
     }
 
-   public void Heal()
+   public void Heal(float newHealth)
     {
-        _currentHealth = _maxHealth;
+        _currentHealth = newHealth;
     }
 
     public void Shield()

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 641265212241948632}
   - component: {fileID: 3437641996267216176}
   - component: {fileID: 2124940723929985996}
+  - component: {fileID: 4139785415782119353}
   m_Layer: 0
   m_Name: BleedEffect
   m_TagString: Untagged
@@ -124,3 +125,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4139785415782119353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5375713485439101454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfc8a0fb7d92df74684b9c1a168abf51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
